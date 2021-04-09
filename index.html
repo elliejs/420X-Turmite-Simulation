@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+  <meta charset="utf-8">
+</head>
+  <body>
+    <h1> MULTICOLOR ANTS</h1>
+    <a href="./sim.html">Simulation is located here</a>
+    <p>The point of the simulation was to create user interactable multicolor ants. These ants have a ring of colors and a corrosponding ring of rules relating (one-to-one) the color to the direction the ant will turn (one of L or R). While the user doesn't get to choose the colors, they do get to chose the rule list. (the colors are shrunk or grown) to match the ordinality of the rules. Please note more than 12 rules are not supported.</p>
+    <a href = "https://github.com/samrsilver/420X-Turmite-Simulation">Github of files here</a>
+    <p>SIMULATION IMPLEMENTATION:<br>
+      I wanted to do this simulation on the gpu as much as possible, and it seemed pretty easy to execute. However, since the ant is modeled as changing its square's value, <i>and then</i> moving, there would be a collision of two gl_FragColor if I tried to modify a neighbor's color value. This means I needed to model the ants in reverse. Or to determine their future without caring about where they currently are. I paint where the ant will end up, turning it based on the value of the square it will soon inhabit, and lastly rotating the color of the future square. This means all the computation is done on neighbors and each square can compute its future without worry of collision.
+      <br>
+      I used a few cool short circuiting tricks to make the ant neighboring only one conditional branch, including assigning a local variable within the condition of the IF. The ant's direction is encoded in the intensity of the red signal, and the color ring is encoded in the green and blue channels, for greater visibility. This allows the ant to sit on top of a color without irreversibly corrupting it. </p>
+      <p>CRITIQUE<br>
+        I didn't get a ton of critiue, and most of it was centered on the fact that the simulation's interactivity requires some explaining and isn't super interactive. I agree with the criticism, and I would've liked to have added more, however my main computer with the code has been on the fritz and can only withstand a few tests per hour, making development time a real experience in patience and frustration. Budo also took too may resources, what with both running a server and Firefox rendering the simulations, so I had to re-browserify every test. I also got the critique that the simulation is <i>TINY</i>[sic], however I like it at such a scale. It reminds me of a screen saver, quietly creating some noise to prevent burn-in. To me it is reminiscent of <a href = "https://www.youtube.com/watch?v=opfhfyjjBuE"> the old window's pipe screen saver</a></p>
+
+  </body>
+</html>
